@@ -16,7 +16,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "company-repo",
+            "prefix": "unicorn",
             "style": "camelCase"
           }
         ],
@@ -34,6 +34,13 @@
       "files": ["*.html"],
       "extends": ["plugin:@nrwl/nx/angular-template"],
       "rules": {}
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "@angular-eslint/directive-selector": "off",
+        "@angular-eslint/component-selector": "off"
+      }
     }
   ]
 }
