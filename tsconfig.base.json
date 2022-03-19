@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@company-repo/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@unicorn/cards-grid": ["libs/cards-grid/src/index.ts"],
+      "@unicorn/sticky-scroll": ["libs/sticky-scroll/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

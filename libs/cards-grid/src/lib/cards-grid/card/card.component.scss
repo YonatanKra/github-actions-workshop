@@ -1,0 +1,32 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  margin: 5px;
+  cursor: pointer;
+  min-width: 400px;
+  max-width: 400px;
+  flex: 1 1 200px;
+}
+
+img {
+  border-radius: 2.5rem;
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  margin: 0;
+}
+
+.description {
+  padding: 2px 16px;
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+  padding: 1rem;
+}

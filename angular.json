@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "projects": {
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "prefix": "api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:webpack",
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "serve": {
+          "builder": "@nrwl/node:node",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/api"]
+        }
+      },
+      "tags": []
+    },
+    "api-interfaces": {
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api-interfaces/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/api-interfaces"]
+        }
+      },
+      "tags": []
+    },
+    "cards-grid": {
+      "projectType": "library",
+      "root": "libs/cards-grid",
+      "sourceRoot": "libs/cards-grid/src",
+      "prefix": "company-repo",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/cards-grid/tsconfig.lib.json",
+            "project": "libs/cards-grid/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/cards-grid/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/cards-grid/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/cards-grid/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/cards-grid"]
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "tags": []
+    },
+    "sticky-scroll": {
+      "projectType": "library",
+      "root": "libs/sticky-scroll",
+      "sourceRoot": "libs/sticky-scroll/src",
+      "prefix": "company-repo",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/sticky-scroll/tsconfig.lib.json",
+            "project": "libs/sticky-scroll/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/sticky-scroll/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/sticky-scroll/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sticky-scroll/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/sticky-scroll"]
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "tags": []
+    },
+    "unicorn-hunt": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/unicorn-hunt",
+      "sourceRoot": "apps/unicorn-hunt/src",
+      "prefix": "company-repo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/unicorn-hunt",
+            "index": "apps/unicorn-hunt/src/index.html",
+            "main": "apps/unicorn-hunt/src/main.ts",
+            "polyfills": "apps/unicorn-hunt/src/polyfills.ts",
+            "tsConfig": "apps/unicorn-hunt/tsconfig.app.json",
+            "assets": [
+              "apps/unicorn-hunt/src/favicon.ico",
+              "apps/unicorn-hunt/src/assets"
+            ],
+            "styles": ["apps/unicorn-hunt/src/styles.scss"],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/unicorn-hunt/src/environments/environment.ts",
+                  "with": "apps/unicorn-hunt/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          },
+          "outputs": ["{options.outputPath}"],
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "unicorn-hunt:build",
+            "proxyConfig": "apps/unicorn-hunt/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "unicorn-hunt:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "unicorn-hunt:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/unicorn-hunt/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/unicorn-hunt/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/unicorn-hunt"]
+        }
+      },
+      "tags": []
+    },
+    "unicorn-hunt-e2e": {
+      "root": "apps/unicorn-hunt-e2e",
+      "sourceRoot": "apps/unicorn-hunt-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/unicorn-hunt-e2e/cypress.json",
+            "tsConfig": "apps/unicorn-hunt-e2e/tsconfig.e2e.json",
+            "devServerTarget": "unicorn-hunt:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "unicorn-hunt:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/unicorn-hunt-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["unicorn-hunt"]
+    }
+  }
+}
