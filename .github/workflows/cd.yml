@@ -78,35 +78,7 @@ jobs:
 
   lint:
     needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Setup NodeJS 16
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-          cache: 'yarn'
-
-      - name: Cache yarn dependencies
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            /home/runner/.cache/Cypress
-            **/node_modules
-          key: our-cache-yarn-${{ hashFiles('**/yarn.lock.json') }}
-
-      - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
-
-      - name: Lint
-        run: yarn lint:ci
+    uses: yonatankra/github-actions-workshop/.github/workflows/_lint.yml@main
 
   test:
     needs: build
