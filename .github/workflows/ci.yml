@@ -78,7 +78,7 @@ jobs:
 
   lint:
     needs: build
-    uses: yonatankra/github-actions-workshop/.github/workflows/_lint.yml@reusable-workflows
+    uses: yonatankra/github-actions-workshop/.github/workflows/_lint.yml@resuable-workflows
 
   test:
     needs: build
