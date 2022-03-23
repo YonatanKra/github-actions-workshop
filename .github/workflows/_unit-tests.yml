@@ -1,0 +1,42 @@
+name: ⑇ Lint
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        type: string
+        description: Operating System to run the workflow on
+        default: 'ubuntu-latest'
+        required: false
+
+jobs:
+  test:
+    runs-on: ${{ inputs.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup NodeJS 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            /home/runner/.cache/Cypress
+            **/node_modules
+          key: our-cache-yarn-${{ hashFiles('**/yarn.lock.json') }}
+
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Test
+        run: yarn test:ci
