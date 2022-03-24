@@ -39,6 +39,14 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
+      - uses: ./tools/custom-actions/e2e/
+        id: hello
+        with:
+          who-to-greet: 'Mona the Octocat'
+
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        
   deploy-demo:
     runs-on: ubuntu-latest
 
