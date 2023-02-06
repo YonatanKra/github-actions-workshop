@@ -41,7 +41,7 @@ jobs:
 
   lint:
     needs: build
-    uses: sandeeptpujari/github-actions-workshop/.github/workflows/lint.yml@reusable-actions
+    uses: sandeeptpujari/github-actions-workshop/.github/workflows/_lint.yml@reusable-actions
 
   test:
     needs: build
