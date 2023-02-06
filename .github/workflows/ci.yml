@@ -7,6 +7,10 @@ on:
 
 jobs:
   lint:
+    strategy:
+      matrix: 
+        command: [lint, "test:ci", e2e ]
+        
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +28,7 @@ jobs:
         run: yarn install
 
       - name: Lint
-        run: yarn lint:ci
+        run: yarn ${{ matrix.command }}
 
   unit-test:
       runs-on: ubuntu-latest
