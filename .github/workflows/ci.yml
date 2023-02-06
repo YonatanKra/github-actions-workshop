@@ -85,7 +85,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: ./tools/custom-actions/e2e/
+      - uses: ./tools/custom-actions/
         id: hello
         with:
           who-to-greet: 'Test the actions'
