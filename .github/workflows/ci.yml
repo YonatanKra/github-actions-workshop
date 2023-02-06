@@ -85,6 +85,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: ./tools/custom-actions/e2e/
+        id: hello
+        with:
+          who-to-greet: 'Test the actions'
+
       - name: Setup NodeJS 16
         uses: actions/setup-node@v2
         with:
