@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint:
+  ci:
     strategy:
       matrix: 
         command: [lint, "test:ci", e2e ]
@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Lint
+      - name: ${{ matrix.command }}
         run: yarn ${{ matrix.command }}
 
 
