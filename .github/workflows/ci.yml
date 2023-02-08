@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix: 
         command: [lint, "test:ci", e2e ]
+        nodeVersion: [12, 14, 16]
         
     runs-on: ubuntu-latest
 
@@ -22,7 +23,7 @@ jobs:
       - name: Setup NodeJS 16
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: ${{ matrix.nodeVersion }}
           cache: 'yarn'
 
       - name: Cache yarn dependencies
