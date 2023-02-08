@@ -1,14 +1,13 @@
-name: CI
+name: CD
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
 concurrency:
-  group: ci-tests-${{ github.ref }}-1
+  group: cd-flow-${{ github.ref }}-1
   cancel-in-progress: true
-
 
 jobs:
   build:
@@ -26,18 +25,21 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
+      - name: Cache yarn dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            /home/runner/.cache/Cypress
+            **/node_modules
+          key: our-cache-yarn-${{ hashFiles('**/yarn.lock.json') }}
+
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
-      - uses: ./tools/custom-actions/e2e/
-        id: hello
-        with:
-          who-to-greet: 'Mona the Octocat'
-
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
-
   deploy-demo:
+    needs: [lint, test, e2e]
     runs-on: ubuntu-latest
 
     permissions:
@@ -76,11 +78,11 @@ jobs:
 
   lint:
     needs: build
-    uses: yonatankra/github-actions-workshop/.github/workflows/_lint.yml@resuable-workflows
+    uses: yonatankra/github-actions-workshop/.github/workflows/_lint.yml@main
 
   test:
     needs: build
-    uses: yonatankra/github-actions-workshop/.github/workflows/_unit-tests.yml@resuable-workflows
+    uses: yonatankra/github-actions-workshop/.github/workflows/_unit-tests.yml@main
 
   e2e:
     needs: build
@@ -113,4 +115,5 @@ jobs:
 
       - name: e2e
         run: yarn e2e
+
 

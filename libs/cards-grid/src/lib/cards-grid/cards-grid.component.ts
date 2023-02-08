@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+export * from './card/card.component';
+
 export interface Card {
   title?: string;
   imageSrc?: string;
